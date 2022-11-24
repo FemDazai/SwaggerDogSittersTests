@@ -16,18 +16,19 @@ namespace SwaggerDogSittersTests
                 Name = "Саша",
                 LastName = "Адилов",
                 Phone = "+79221110500",
-                Email = "adilovsasha@mail.com",
+                Email = "adilovsashaa@mail.com",
                 Password = "12345689",
                 Address = "1234567890",
                 Promocode = "string"
             };
             
-            int id = client.RegistrationClient(clientsRequestModel);
+            int actualid = client.RegistrationClient(clientsRequestModel);
+            Assert.IsNotNull(actualid);
 
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "IAdmin@mail.ru",
-                Password = "123456789"
+                Email = "sashaa@mail.com",
+                Password = "12345689"
             };
             string actualToken = client.Auth(authRequestModel);
 
