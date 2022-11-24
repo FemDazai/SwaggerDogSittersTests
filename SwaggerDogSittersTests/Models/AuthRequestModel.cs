@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SwaggerDogSittersTests.Models
 {
-    public class AuthInputModel
+    public class AuthRequestModel
     {
         [JsonProperty("password")]
         [JsonPropertyName("password")]
