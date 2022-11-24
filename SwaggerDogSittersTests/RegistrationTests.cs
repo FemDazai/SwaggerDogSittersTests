@@ -17,18 +17,19 @@ namespace SwaggerDogSittersTests
                 Name = "Саша",
                 LastName = "Адилов",
                 Phone = "+79221110500",
-                Email = "adilovsasha@mail.com",
+                Email = "aaadilovsashaa@mail.com",
                 Password = "12345689",
                 Address = "1234567890",
                 Promocode = "string"
             };
 
-            int id = client.RegistrationClient(clientsRequestModel);
+            int actualid = client.RegistrationClient(clientsRequestModel);
+            Assert.NotNull(actualid);
 
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "IAdmin@mail.ru",
-                Password = "123456789"
+                Email = "aaadilovsashaa@mail.com",
+                Password = "12345689"
             };
             string actualToken = client.Auth(authRequestModel);
 
@@ -42,7 +43,7 @@ namespace SwaggerDogSittersTests
                 Name = "Zinaida",
                 LastName = "Pavlova",
                 Phone = "phone",
-                Email = "zinaidapavlovna@mail.ru",
+                Email = "zzinaidapavlovnaa@mail.ru",
                 Password = "123456789",
                 Age = 130,
                 Experience = 23,
@@ -57,8 +58,45 @@ namespace SwaggerDogSittersTests
                     }
                 }
             };
-            int id = client.RegistrationSitters(sittersrequestModel);
-            //У нас есть класс, который ведёт общение с сервером. Создаём объект это класса
+
+            int actualId = client.RegistrationSitters(sittersrequestModel);
+            Assert.NotNull(actualId);
+
+            AuthRequestModel authRequestModel = new AuthRequestModel()
+            {
+                Email = "zzinaidapavlovna@mail.ru",
+                Password = "123456789"
+            };
+            string actualToken = client.Auth(authRequestModel);
+
+            Assert.NotNull(actualToken);
+        }
+
+        public void ChangePasswordTests()
+        {
+            NewClientsClient client = new NewClientsClient();
+            ClientsResponseModel clientsRequestModel = new ClientsResponseModel()
+            {
+                Name = "Саша",
+                LastName = "Адилов",
+                Phone = "+79221110500",
+                Email = "aaadilovsashaa@mail.com",
+                Password = "12345689",
+                Address = "1234567890",
+                Promocode = "string"
+            };
+
+            string Password = client.RegistrationClient(clientsRequestModel);
+            Assert.NotNull(actualid);
+
+            AuthRequestModel authRequestModel = new AuthRequestModel()
+            {
+                Email = "aaadilovsashaa@mail.com",
+                Password = "12345689"
+            };
+            string actualToken = client.Auth(authRequestModel);
+
+            Assert.NotNull(actualToken);
         }
     }
 }
