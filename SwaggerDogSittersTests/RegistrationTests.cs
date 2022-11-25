@@ -10,18 +10,21 @@ namespace SwaggerDogSittersTests
         [Test]
         public void RegistrationAndAuthClientTest()
         {
-            //У нас есть класс, который ведёт общение с сервером. Создаём объект это класса
+            //пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             NewClientsClient client = new NewClientsClient();
             ClientsResponseModel clientsRequestModel = new ClientsResponseModel()
             {
-                Name = "Саша",
-                LastName = "Адилов",
+                Name = "пїЅпїЅпїЅпїЅ",
+                LastName = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                 Phone = "+79221110500",
                 Email = "aaadilovsashaa@mail.com",
                 Password = "12345689",
                 Address = "1234567890",
                 Promocode = "string"
             };
+            
+            int actualid = client.RegistrationClient(clientsRequestModel);
+            Assert.IsNotNull(actualid);
 
             int actualid = client.RegistrationClient(clientsRequestModel);
             Assert.NotNull(actualid);
@@ -77,8 +80,8 @@ namespace SwaggerDogSittersTests
             NewClientsClient client = new NewClientsClient();
             ClientsResponseModel clientsRequestModel = new ClientsResponseModel()
             {
-                Name = "Саша",
-                LastName = "Адилов",
+                Name = "пїЅпїЅпїЅпїЅ",
+                LastName = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                 Phone = "+79221110500",
                 Email = "aaadilovsashaa@mail.com",
                 Password = "12345689",

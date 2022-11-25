@@ -48,6 +48,7 @@ namespace SwaggerDogSittersTests.Client
 
         public string Auth(AuthRequestModel model)
         {
+            HttpStatusCode expectedCode = HttpStatusCode.OK;
             string json = JsonSerializer.Serialize<AuthRequestModel>(model);
 
             HttpClientHandler clientHandler = new HttpClientHandler();
@@ -64,6 +65,7 @@ namespace SwaggerDogSittersTests.Client
 
             HttpStatusCode actualCode = responseMessage.StatusCode;
 
+            Assert.AreEqual(expectedCode, actualCode);
             string token = responseMessage.Content.ReadAsStringAsync().Result;
 
             return token;
