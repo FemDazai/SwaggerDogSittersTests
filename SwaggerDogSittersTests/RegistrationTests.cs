@@ -10,13 +10,14 @@ namespace SwaggerDogSittersTests
         [Test]
         public void RegistrationAndAuthClientTest()
         {
+            //пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             NewClientsClient client = new NewClientsClient();
             ClientsResponseModel clientsRequestModel = new ClientsResponseModel()
             {
-                Name = "Саша",
-                LastName = "Адилов",
+                Name = "пїЅпїЅпїЅпїЅ",
+                LastName = "пїЅпїЅпїЅпїЅпїЅпїЅ",
                 Phone = "+79221110500",
-                Email = "adilovsashaa@mail.com",
+                Email = "aaadilovsashaa@mail.com",
                 Password = "12345689",
                 Address = "1234567890",
                 Promocode = "string"
@@ -25,9 +26,75 @@ namespace SwaggerDogSittersTests
             int actualid = client.RegistrationClient(clientsRequestModel);
             Assert.IsNotNull(actualid);
 
+            int actualid = client.RegistrationClient(clientsRequestModel);
+            Assert.NotNull(actualid);
+
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "sashaa@mail.com",
+                Email = "aaadilovsashaa@mail.com",
+                Password = "12345689"
+            };
+            string actualToken = client.Auth(authRequestModel);
+
+            Assert.NotNull(actualToken);
+        }
+        public void RegistrationAndAuthSittersTest()
+        {
+            NewClientsClient client = new NewClientsClient();
+            SittersResponseModel sittersrequestModel = new SittersResponseModel()
+            {
+                Name = "Zinaida",
+                LastName = "Pavlova",
+                Phone = "phone",
+                Email = "zzinaidapavlovnaa@mail.ru",
+                Password = "123456789",
+                Age = 130,
+                Experience = 23,
+                Sex = 0,
+                Description = "string",
+                PriceCatalog = new List<PriceCatalogRequest>
+                {
+                    new PriceCatalogRequest
+                    {
+                        Service = 1,
+                        Price = 5000
+                    }
+                }
+            };
+
+            int actualId = client.RegistrationSitters(sittersrequestModel);
+            Assert.NotNull(actualId);
+
+            AuthRequestModel authRequestModel = new AuthRequestModel()
+            {
+                Email = "zzinaidapavlovna@mail.ru",
+                Password = "123456789"
+            };
+            string actualToken = client.Auth(authRequestModel);
+
+            Assert.NotNull(actualToken);
+        }
+
+        public void ChangePasswordTests()
+        {
+            NewClientsClient client = new NewClientsClient();
+            ClientsResponseModel clientsRequestModel = new ClientsResponseModel()
+            {
+                Name = "пїЅпїЅпїЅпїЅ",
+                LastName = "пїЅпїЅпїЅпїЅпїЅпїЅ",
+                Phone = "+79221110500",
+                Email = "aaadilovsashaa@mail.com",
+                Password = "12345689",
+                Address = "1234567890",
+                Promocode = "string"
+            };
+
+            string Password = client.RegistrationClient(clientsRequestModel);
+            Assert.NotNull(actualid);
+
+            AuthRequestModel authRequestModel = new AuthRequestModel()
+            {
+                Email = "aaadilovsashaa@mail.com",
                 Password = "12345689"
             };
             string actualToken = client.Auth(authRequestModel);
