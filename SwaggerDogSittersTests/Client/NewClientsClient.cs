@@ -1,8 +1,11 @@
 ﻿using SwaggerDogSittersTests.Models;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json;
+using System.Collections;
+using System.Collections.Generic;
 
 
 namespace SwaggerDogSittersTests.Client
@@ -77,51 +80,21 @@ namespace SwaggerDogSittersTests.Client
 
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-
             HttpClient client = new HttpClient(clientHandler);
             HttpRequestMessage message = new HttpRequestMessage()
+
             {
                 Method = HttpMethod.Post,
                 RequestUri = new System.Uri($"https://piter-education.ru:10000/Sitters"),
                 Content = new StringContent(jsone, Encoding.UTF8, "application/json")
             };
             HttpResponseMessage responseMessage = client.Send(message);
-
             HttpStatusCode actualCode = responseMessage.StatusCode;
+
             Assert.AreEqual(expectedCode, actualCode);
 
             int id = Convert.ToInt32(responseMessage.Content.ReadAsStringAsync().Result);
-
             return id;
-        }
-        public void GetChangeClientPassword(ClientsResponseModel model)
-        {
-            //Ожидаемый результат
-            HttpStatusCode expectedCode = HttpStatusCode.NoContent;
-            //Далее вводим json модельки клиента и сереализуем его
-            string jsone = JsonSerializer.Serialize<ClientsResponseModel>(model);
-
-            //Это что-то связанное с сертификатами
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            HttpClient client = new HttpClient(clientHandler);
-
-            //Из готового класса создаём объект, который будет хранить в себе метод, запрос(url), по которому проиойдёт поиск
-            //И контент, который будет содержать в себе инфу про сами данные, которые мы отправили
-            HttpRequestMessage message = new HttpRequestMessage()
-            {
-                Method = HttpMethod.Patch,
-                RequestUri = new System.Uri($"https://piter-education.ru:10000/Clients/password"),
-                Content = new StringContent(jsone, Encoding.UTF8, "application/json")
-            };
-
-            //Здесь будет лежать возвращаемый результат, после того как мы отправили message
-            HttpResponseMessage responseMessage = client.Send(message);
-
-            //фактический результат статус кода, а далее их сравнение.
-            HttpStatusCode actualCode = responseMessage.StatusCode;
-            //Возврат id
-            Assert.AreEqual(expectedCode, actualCode);
 
         }
     }
