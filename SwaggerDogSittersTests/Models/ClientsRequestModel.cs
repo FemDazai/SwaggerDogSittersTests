@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace SwaggerDogSittersTests.Models
 {
-    public class ClientsResponseModel
+    public class ClientsRequestModel
     {
         [JsonProperty("name")]
         [JsonPropertyName("name")]
