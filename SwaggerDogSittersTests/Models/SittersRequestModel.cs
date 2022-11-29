@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace SwaggerDogSittersTests.Models
 {
@@ -24,7 +23,7 @@ namespace SwaggerDogSittersTests.Models
             public int Price { get; set; }
         }
 
-        public class SittersResponseModel
+        public class SittersRequestModel
         {
             [JsonProperty("name")]
             [JsonPropertyName("name")]
