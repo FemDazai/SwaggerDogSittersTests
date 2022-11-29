@@ -93,28 +93,28 @@ namespace SwaggerDogSittersTests.Client
             int id = Convert.ToInt32(responseMessage.Content.ReadAsStringAsync().Result);
             return id;
         }
-            public List<GetSittersResponseModel> GetSitters(string token)
+        public List<GetSittersResponseModel> GetSitters(string token)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.OK;
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            HttpClient client = new HttpClient(clientHandler);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            HttpRequestMessage message = new HttpRequestMessage()
+
             {
-                HttpStatusCode expectedCode = HttpStatusCode.OK;
+                Method = HttpMethod.Get,
+                RequestUri = new System.Uri($"https://piter-education.ru:10000/Sitters"),
+            };
+            HttpResponseMessage responseMessage = client.Send(message);
+            HttpStatusCode actualCode = responseMessage.StatusCode;
 
-                HttpClientHandler clientHandler = new HttpClientHandler();
-                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-
-                HttpClient client = new HttpClient(clientHandler);
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                HttpRequestMessage message = new HttpRequestMessage()
-
-                {
-                    Method = HttpMethod.Get,
-                    RequestUri = new System.Uri($"https://piter-education.ru:10000/Sitters"),
-                };
-                HttpResponseMessage responseMessage = client.Send(message);
-                HttpStatusCode actualCode = responseMessage.StatusCode;
-
-                Assert.AreEqual(expectedCode, actualCode);
-                string responseJsone = responseMessage.Content.ReadAsStringAsync().Result;
-                List<GetSittersResponseModel> sitters= JsonSerializer.Deserialize<List<GetSittersResponseModel>>(responseJsone)!;
-                return sitters; 
-            }
+            Assert.AreEqual(expectedCode, actualCode);
+            string responseJsone = responseMessage.Content.ReadAsStringAsync().Result;
+            List<GetSittersResponseModel> sitters = JsonSerializer.Deserialize<List<GetSittersResponseModel>>(responseJsone)!;
+            return sitters;
+        }
     }
 }
