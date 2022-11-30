@@ -47,6 +47,13 @@ namespace SwaggerDogSittersTests
             Assert.NotNull(actualToken);
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            DBCleaner dbc = new DBCleaner();
+            dbc.Clear();
+        }
+
         [Test]
         public void RegistrationAndAuthSittersTest()
         {
