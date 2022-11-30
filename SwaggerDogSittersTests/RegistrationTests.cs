@@ -21,7 +21,7 @@ namespace SwaggerDogSittersTests
                 Name = "sasha",
                 LastName = "adilov",
                 Phone = "+79221110500",
-                Email = "AAADDilovsashAAA@mail.com",
+                Email = "AAADDiiilovsashAAA11@mail.com",
                 Password = "12345689",
                 Address = "1234567890",
                 Promocode = "string"
@@ -32,7 +32,7 @@ namespace SwaggerDogSittersTests
 
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "AAADDilovsashAAA@mail.com",
+                Email = "AAADDiiilovsashAAA11@mail.com",
                 Password = "12345689"
             };
             string actualToken = client.Auth(authRequestModel);
@@ -40,15 +40,13 @@ namespace SwaggerDogSittersTests
             Assert.NotNull(actualToken);
         }
 
-        //[TearDown]
-        //public void DeleteClient()
-        //{
-        //    string connectionString = @"Data Source =80.78.240.16; Initial Catalog =ArmenianChairDogsitting.DB; Persist Security Info = True ; User Id =student; Password=qwe!23";
-        //    IDbConnection dbConnection = new SqlConnection(connectionString);
-        //    dbConnection.Open();
-        //    dbConnection.Query("Delete * from Client where Email = 'Aaaddilovsasha@mail.com' ");
-        //    dbConnection.Close();
-        //}
+        [TearDown]
+        public void TearDown()
+        {
+            DBCleaner dbc = new DBCleaner();
+            dbc.Clear();
+        }
+
         [Test]
         public void RegistrationAndAuthSittersTest()
         {
