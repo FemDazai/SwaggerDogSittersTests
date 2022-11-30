@@ -75,11 +75,11 @@ namespace SwaggerDogSittersTests
             };
             List<SitterResponseModel> sitters = client.GetSearch(searchRequestModel);
         }
-        //[TearDown]
-        //public void TearDown()
-        //{
-        //    DBCleaner dBCleaner = new DBCleaner();
-        //    dBCleaner.Clear();
-        //}
+        [TearDown]
+        public void TearDown()
+        {
+            DBCleaner dBCleaner = new DBCleaner();
+            dBCleaner.Clear();
+        }
     }
 }

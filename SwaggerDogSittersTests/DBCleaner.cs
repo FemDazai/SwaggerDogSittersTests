@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
+using Dapper;
 
 namespace SwaggerDogSittersTests
 {
@@ -10,7 +11,7 @@ namespace SwaggerDogSittersTests
             string connectionString = @"Data Source=80.78.240.16; Initial Catalog = ArmenianChairDogsitting.DB; Presist Security Info= True; User Id =student; Password=qwe!23";
             IDbConnection dbconnection = new SqlConnection(connectionString);
             dbconnection.Open();
-            dbconnection.Query("Delete");
+            dbconnection.Query("delete from Client");
             dbconnection.Close();
             //добавление класса по очистике бд
         }

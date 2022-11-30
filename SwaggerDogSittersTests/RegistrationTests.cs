@@ -11,6 +11,13 @@ namespace SwaggerDogSittersTests
 {
     public class RegistrationTests
     {
+        //[OneTimeSetUp]
+        //public void ClearClients()
+        //{
+        //    DBCleaner dBCleaner = new DBCleaner();
+        //    dBCleaner.Clear();
+        //}
+
         [Test]
         public void RegistrationAndAuthClientTest()
         {
@@ -40,15 +47,6 @@ namespace SwaggerDogSittersTests
             Assert.NotNull(actualToken);
         }
 
-        //[TearDown]
-        //public void DeleteClient()
-        //{
-        //    string connectionString = @"Data Source =80.78.240.16; Initial Catalog =ArmenianChairDogsitting.DB; Persist Security Info = True ; User Id =student; Password=qwe!23";
-        //    IDbConnection dbConnection = new SqlConnection(connectionString);
-        //    dbConnection.Open();
-        //    dbConnection.Query("Delete * from Client where Email = 'Aaaddilovsasha@mail.com' ");
-        //    dbConnection.Close();
-        //}
         [Test]
         public void RegistrationAndAuthSittersTest()
         {
@@ -84,6 +82,54 @@ namespace SwaggerDogSittersTests
             };
             string actualToken = client.Auth(authRequestModel);
             Assert.NotNull(actualToken);
+        }
+        //[TearDown]
+        //public void ClearSitters()
+        //{
+        //    DBCleaner dBCleaner = new DBCleaner();
+        //    dBCleaner.Clear();
+        //}
+
+        [Test]
+        public void AnimalRegistrationTest()
+        {
+            //� ��� ���� �����, ������� ���� ������� � ��������. ������ ������ ��� ������
+            NewClientsClient client = new NewClientsClient();
+            ClientsRequestModel clientsRequestModel = new ClientsRequestModel()
+            {
+                Name="Rina",
+                LastName="Kirova",
+                Phone="+71234567890",
+                Email="rinakir@mail.com",
+                Password="123456789",
+                Address="1234567890",
+                Promocode="1234567890"
+            };
+
+            int actualId = client.RegistrationClient(clientsRequestModel);
+            Assert.IsNotNull(actualId);
+
+            AuthRequestModel authRequestModel = new AuthRequestModel()
+            {
+                Email = "rinakir@mail.com",
+                Password = "123456789"
+            };
+            string actualToken = client.Auth(authRequestModel);
+
+            Assert.NotNull(actualToken);
+
+            AnimalRequestModel animalRequestModel = new AnimalRequestModel()
+            {
+                Name="kiko",
+                Age=7,
+                RecommendationsForCare="string",
+                ClientId= 10157,
+                Breed="poodles",
+                Size= 4
+            };
+            int actuaAnimallId = client.RegistrationClient(clientsRequestModel);
+            Assert.IsNotNull(actualId);
+
         }
     }
 }

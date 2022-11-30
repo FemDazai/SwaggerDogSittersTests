@@ -68,5 +68,11 @@ namespace SwaggerDogSittersTests
 
             List<GetSittersResponseModel> sitters = client.GetSitters(token);
         }
+        //[TearDown]
+        //public void ClearSitters()
+        //{
+        //    DBCleaner dBCleaner = new DBCleaner();
+        //    dBCleaner.Clear();
+        //}
     }
 }
