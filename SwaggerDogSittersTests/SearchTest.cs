@@ -23,7 +23,7 @@ namespace SwaggerDogSittersTests
                 Name = "sergey",
                 LastName = "sergeev",
                 Phone = "+79221110500",
-                Email = "sergeysergeev1@mail.com",
+                Email = "sergeysergeev111@mail.com",
                 Password = "12345689",
                 Address = "1234567890",
                 Promocode = "string"
@@ -42,7 +42,7 @@ namespace SwaggerDogSittersTests
                 Name = "Zina",
                 LastName = "Pavlova",
                 Phone = "+71234567890",
-                Email = "zinapavlovnaa@mail.ru",
+                Email = "zinapavlovnaa11@mail.ru",
                 Password = "123456789",
                 Age = 130,
                 Experience = 23,
@@ -56,7 +56,7 @@ namespace SwaggerDogSittersTests
                         Price = 5000
                     }
                 }
-                    
+
             };
         }
 
@@ -73,8 +73,9 @@ namespace SwaggerDogSittersTests
                 ServiceType = 1,
                 District = 1
             };
-            List<SitterResponseModel> sitters = client.GetSearch(searchRequestModel);
+            List<SitterSearchResponseModel> sitters = client.GetSearch(searchRequestModel);
         }
+
         //[TearDown]
         //public void TearDown()
         //{
