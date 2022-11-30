@@ -28,7 +28,7 @@ namespace SwaggerDogSittersTests
                 Name = "sasha",
                 LastName = "adilov",
                 Phone = "+79221110500",
-                Email = "AAADDilovsashAAA@mail.com",
+                Email = "AAADDIlovsashAAA@mail.com",
                 Password = "12345689",
                 Address = "1234567890",
                 Promocode = "string"
@@ -39,7 +39,7 @@ namespace SwaggerDogSittersTests
 
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "AAADDilovsashAAA@mail.com",
+                Email = "AAADDIlovsashAAA@mail.com",
                 Password = "12345689"
             };
             string actualToken = client.Auth(authRequestModel);
@@ -100,7 +100,7 @@ namespace SwaggerDogSittersTests
                 Name="Rina",
                 LastName="Kirova",
                 Phone="+71234567890",
-                Email="rinakir@mail.com",
+                Email="RRrinakir@mail.com",
                 Password="123456789",
                 Address="1234567890",
                 Promocode="1234567890"
@@ -111,7 +111,7 @@ namespace SwaggerDogSittersTests
 
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "rinakir@mail.com",
+                Email = "RRrinakir@mail.com",
                 Password = "123456789"
             };
             string actualToken = client.Auth(authRequestModel);
@@ -120,15 +120,15 @@ namespace SwaggerDogSittersTests
 
             AnimalRequestModel animalRequestModel = new AnimalRequestModel()
             {
-                Name="kiko",
+                Name="Kiko",
                 Age=7,
                 RecommendationsForCare="string",
-                ClientId= 10157,
+                ClientId= actualId,
                 Breed="poodles",
                 Size= 4
             };
-            int actuaAnimallId = client.RegistrationClient(clientsRequestModel);
-            Assert.IsNotNull(actualId);
+            int actualid = client.AnimalRegistration(animalRequestModel);
+            Assert.IsNotNull(actualid);
 
         }
     }
