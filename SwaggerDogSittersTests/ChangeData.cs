@@ -44,11 +44,6 @@ namespace SwaggerDogSittersTests
             };
             string actualToken1 = client.Auth(authRequestModel1);
             Assert.NotNull(actualToken1);
-
-
-
-
-
         }
     }
 }

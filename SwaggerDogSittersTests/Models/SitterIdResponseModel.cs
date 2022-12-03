@@ -4,53 +4,41 @@ namespace SwaggerDogSittersTests.Models
 {
     public class SitterIdResponseModel
     {
-        public class PriceCatalogSitterId
-        {
-            [JsonPropertyName("service")]
-            public int service { get; set; }
+        [JsonPropertyName("id")]
+        public int id { get; set; }
 
-            [JsonPropertyName("price")]
-            public int price { get; set; }
-        }
+        [JsonPropertyName("name")]
+        public string name { get; set; }
 
-        public class GetSitterIdResponseModel
-        {
-            [JsonPropertyName("id")]
-            public int id { get; set; }
+        [JsonPropertyName("lastName")]
+        public string lastName { get; set; }
 
-            [JsonPropertyName("name")]
-            public string name { get; set; }
+        [JsonPropertyName("phone")]
+        public string phone { get; set; }
 
-            [JsonPropertyName("lastName")]
-            public string lastName { get; set; }
+        [JsonPropertyName("email")]
+        public string email { get; set; }
 
-            [JsonPropertyName("phone")]
-            public string phone { get; set; }
+        [JsonPropertyName("age")]
+        public int age { get; set; }
 
-            [JsonPropertyName("email")]
-            public string email { get; set; }
+        [JsonPropertyName("experience")]
+        public int experience { get; set; }
 
-            [JsonPropertyName("age")]
-            public int age { get; set; }
+        [JsonPropertyName("sex")]
+        public int sex { get; set; }
 
-            [JsonPropertyName("experience")]
-            public int experience { get; set; }
+        [JsonPropertyName("description")]
+        public string description { get; set; }
+        
+        [JsonPropertyName("priceCatalog")]
+        public List<PriceCatalog> priceCatalog { get; set; }
 
-            [JsonPropertyName("sex")]
-            public int sex { get; set; }
+        [JsonPropertyName("isDeleted")]
+        public bool isDeleted { get; set; }
 
-            [JsonPropertyName("description")]
-            public string description { get; set; }
-
-            [JsonPropertyName("priceCatalog")]
-            public List<PriceCatalogSitterId> priceCatalog { get; set; }
-
-            [JsonPropertyName("isDeleted")]
-            public bool isDeleted { get; set; }
-
-            [JsonPropertyName("regestrationDate")]
-            public string regestrationDate { get; set; }
-        }
+        [JsonPropertyName("regestrationDate")]
+        public string regestrationDate { get; set; }
 
     }
 }

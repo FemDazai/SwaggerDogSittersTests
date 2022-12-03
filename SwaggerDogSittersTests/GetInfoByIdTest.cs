@@ -13,7 +13,6 @@ namespace SwaggerDogSittersTests
         [Test]
         public void GetSitterInfoByIdTest()
         {
-            //� ��� ���� �����, ������� ���� ������� � ��������. ������ ������ ��� ������
             SittersClient sitterClient = new SittersClient();
             SittersRequestModel sittersrequestModel = new SittersRequestModel()
             {
@@ -26,9 +25,9 @@ namespace SwaggerDogSittersTests
                 Experience = 23,
                 Sex = 1,
                 Description = "string",
-                PriceCatalog = new List<PriceCatalogRequest>
+                PriceCatalog = new List<PriceCatalog>
                     {
-                        new PriceCatalogRequest
+                        new PriceCatalog
                         {
                             Service = 1,
                             Price = 5000

@@ -1,14 +1,8 @@
 ﻿using SwaggerDogSittersTests.Client;
 using SwaggerDogSittersTests.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SwaggerDogSittersTests
 {
-
     public class InputPasswordTest
     {
         [Test]
@@ -26,13 +20,13 @@ namespace SwaggerDogSittersTests
                 Experience = 23,
                 Sex = 1,
                 Description = "string",
-                PriceCatalog = new List<PriceCatalogRequest>
+                PriceCatalog = new List<PriceCatalog>
             {
-                        new PriceCatalogRequest
-                        {
-                            Service = 1,
-                            Price = 5000
-                        }
+                    new PriceCatalog
+                    {
+                        Service = 1,
+                        Price = 5000
+                    }
             }
             };
         }
