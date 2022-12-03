@@ -58,15 +58,32 @@ namespace SwaggerDogSittersTests
                 Assert.NotNull(sitter.RegistrationSitters(sittersrequestModel));
             }
 
+            NewClientsClient client = new NewClientsClient();
+            ClientsRequestModel clientsRequestModel = new ClientsRequestModel()
+            {
+                Name = "sasha",
+                LastName = "adilov",
+                Phone = "+79221110500",
+                Email = "KAADDIlovsashAAA@mail.com",
+                Password = "12345689",
+                Address = "1234567890",
+                Promocode = "string"
+            };
+
+            int actualId = client.RegistrationClient(clientsRequestModel);
+            Assert.IsNotNull(actualId);
+
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "sashaaa@mail.com",
+                Email = "KAADDIlovsashAAA@mail.com",
                 Password = "12345689"
             };
-            NewClientsClient client = new NewClientsClient();
-            string token = client.Auth(authRequestModel);
+            string actualToken = client.Auth(authRequestModel);
 
-            List<GetSittersResponseModel> sitters = sitter.GetSitters(token);
+            Assert.NotNull(actualToken);
+
+            List<GetSittersResponseModel> sitters = sitter.GetSitters(actualToken);
+            Assert.NotNull(sitters);
         }
         //[TearDown]
         //public void ClearSitters()
