@@ -14,16 +14,16 @@ namespace SwaggerDogSittersTests
     public class SearchTest
     {
         [Test]
-        public void RegistrationAndAuthClientTest()
-        {
-            //� ��� ���� �����, ������� ���� ������� � ��������. ������ ������ ��� ������
+        public void GetSearchSitterInfoTest()
+        {   
             NewClientsClient client = new NewClientsClient();
+            SittersClient sitterClient = new SittersClient();
             ClientsRequestModel clientsRequestModel = new ClientsRequestModel()
             {
                 Name = "sergey",
                 LastName = "sergeev",
                 Phone = "+79221110500",
-                Email = "sergeysergeev111@mail.com",
+                Email = "sergeysergeev2222211111@mail.com",
                 Password = "12345689",
                 Address = "1234567890",
                 Promocode = "string"
@@ -32,17 +32,13 @@ namespace SwaggerDogSittersTests
             int actualId = client.RegistrationClient(clientsRequestModel);
             Assert.IsNotNull(actualId);
 
-        }
 
-        public void RegistrationAndAuthSittersTest()
-        {
-            NewClientsClient client = new NewClientsClient();
-            SittersRequestModel sittersrequestModel = new SittersRequestModel()
+            SittersRequestModel sittersRequestModel = new SittersRequestModel()
             {
                 Name = "Zina",
                 LastName = "Pavlova",
                 Phone = "+71234567890",
-                Email = "zinapavlovnaa11@mail.ru",
+                Email = "zinapavlovnaa222221111@mail.ru",
                 Password = "123456789",
                 Age = 130,
                 Experience = 23,
@@ -58,12 +54,9 @@ namespace SwaggerDogSittersTests
                 }
 
             };
-        }
+            int actualId2 = sitterClient.RegistrationSitters(sittersRequestModel);
+            Assert.IsNotNull(actualId2);
 
-        public void GetSearchTest()
-        {
-            //� ��� ���� �����, ������� ���� ������� � ��������. ������ ������ ��� ������
-            NewClientsClient client = new NewClientsClient();
             SearchRequestModel searchRequestModel = new SearchRequestModel()
             {
                 PriceMinimum = 0,
@@ -73,7 +66,8 @@ namespace SwaggerDogSittersTests
                 ServiceType = 1,
                 District = 1
             };
-            List<SitterSearchResponseModel> sitters = client.GetSearch(searchRequestModel);
+            List<SitterSearchResponseModel> sitters = sitterClient.GetSearch(searchRequestModel);
+            Assert.NotNull(sitters);
         }
         [TearDown]
         public void TearDown()

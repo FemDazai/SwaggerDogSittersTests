@@ -63,7 +63,7 @@ namespace SwaggerDogSittersTests
                 Name = "Zinaida",
                 LastName = "Pavlova",
                 Phone = "+71234567890",
-                Email = "ZZZiinaidapavlovnaa@mail.ru",
+                Email = "ZZZ1iinaidapavlovnaa@mail.ru",
                 Password = "123456789",
                 Age = 130,
                 Experience = 23,
@@ -79,12 +79,13 @@ namespace SwaggerDogSittersTests
                     }
             };
 
-            int actualid = client.RegistrationSitters(sittersrequestModel);
+            SittersClient sitterClient = new SittersClient();
+            int actualid = sitterClient.RegistrationSitters(sittersrequestModel);
             Assert.NotNull(actualid);
 
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "ZZZiinaidapavlovnaa@mail.ru",
+                Email = "ZZZ1iinaidapavlovnaa@mail.ru",
                 Password = "123456789"
             };
             string actualToken = client.Auth(authRequestModel);
@@ -100,7 +101,6 @@ namespace SwaggerDogSittersTests
         [Test]
         public void AnimalRegistrationTest()
         {
-            //� ��� ���� �����, ������� ���� ������� � ��������. ������ ������ ��� ������
             NewClientsClient client = new NewClientsClient();
             ClientsRequestModel clientsRequestModel = new ClientsRequestModel()
             {
@@ -134,7 +134,7 @@ namespace SwaggerDogSittersTests
                 Breed="poodles",
                 Size= 4
             };
-            int actualid = client.AnimalRegistration(animalRequestModel);
+            int actualid = client.AnimalRegistration(actualToken, animalRequestModel);
             Assert.IsNotNull(actualid);
 
         }
