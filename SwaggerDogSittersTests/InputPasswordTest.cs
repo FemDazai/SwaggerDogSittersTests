@@ -14,7 +14,7 @@ namespace SwaggerDogSittersTests
         [Test]
         public void InputPasswordTestSitters()
         {
-            NewClientsClient client = new NewClientsClient();
+            SittersClient client = new SittersClient();
             SittersRequestModel sittersRequestModel = new SittersRequestModel()
             {
                 Name = "Zinaida",

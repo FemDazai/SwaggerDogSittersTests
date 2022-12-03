@@ -9,7 +9,7 @@ namespace SwaggerDogSittersTests
         [Test]
         public void GetSitters()
         {
-            NewClientsClient sitter = new NewClientsClient();
+            SittersClient sitter = new SittersClient();
             List<SittersRequestModel> sittersrequestModels = new List<SittersRequestModel> {
             new SittersRequestModel()
             {
@@ -66,7 +66,7 @@ namespace SwaggerDogSittersTests
             NewClientsClient client = new NewClientsClient();
             string token = client.Auth(authRequestModel);
 
-            List<GetSittersResponseModel> sitters = client.GetSitters(token);
+            List<GetSittersResponseModel> sitters = sitter.GetSitters(token);
         }
         //[TearDown]
         //public void ClearSitters()

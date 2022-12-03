@@ -24,16 +24,6 @@ namespace SwaggerDogSittersTests.Models
         [JsonProperty("regestrationDate")]
         [JsonPropertyName("regestrationDate")]
         public string RegestrationDate { get; set; }
-
-        public override bool Equals(object? obj)
-        {
-            return obj is SitterSearchResponseModel model &&
-                   Id == model.Id &&
-                   Name == model.Name &&
-                   LastName == model.LastName &&
-                   Experience == model.Experience &&
-                   RegestrationDate == model.RegestrationDate;
-        }
     }
 }
 
