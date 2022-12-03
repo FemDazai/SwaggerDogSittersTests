@@ -105,6 +105,9 @@ namespace SwaggerDogSittersTests.Client
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
             HttpClient client = new HttpClient(clientHandler);
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
 
             HttpRequestMessage message = new HttpRequestMessage()
             {
