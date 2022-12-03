@@ -1,7 +1,6 @@
 ﻿using SwaggerDogSittersTests.Client;
 using SwaggerDogSittersTests.Models;
 
-
 namespace SwaggerDogSittersTests
 {
     public class GetListTests
@@ -22,9 +21,9 @@ namespace SwaggerDogSittersTests
                 Experience = 23,
                 Sex = 1,
                 Description = "string",
-                PriceCatalog = new List<PriceCatalogRequest>
+                PriceCatalog = new List<PriceCatalog>
                     {
-                        new PriceCatalogRequest
+                        new PriceCatalog
                         {
                             Service = 1,
                             Price = 5000
@@ -42,9 +41,9 @@ namespace SwaggerDogSittersTests
                 Experience = 23,
                 Sex = 1,
                 Description = "string",
-                PriceCatalog = new List<PriceCatalogRequest>
+                PriceCatalog = new List<PriceCatalog>
                     {
-                        new PriceCatalogRequest
+                        new PriceCatalog
                         {
                             Service = 1,
                             Price = 5000

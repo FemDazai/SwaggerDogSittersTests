@@ -1,26 +1,11 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace SwaggerDogSittersTests.Models
 {
     //НАЧАЛО. Чтобы начать работу, нам нужно понять с чем работаем. Создаём модельку, с котрыми потом будем работать.
     //После написания, идём в класс, который создан для общения с сервером. В данной ситуации, это SuperClient
-    public class PriceCatalogResponse
-    {
-        [JsonProperty("service")]
-        [JsonPropertyName("service")]
-        public int Service { get; set; }
-
-        [JsonProperty("price")]
-        [JsonPropertyName("price")]
-        public int Price { get; set; }
-    }
-
+    
     public class SitterResponseModel
     {
         [JsonProperty("name")]
@@ -59,9 +44,8 @@ namespace SwaggerDogSittersTests.Models
         [JsonPropertyName("description")]
         public string Description { get; set; }
 
-        [JsonProperty("priceCatalog")]
         [JsonPropertyName("priceCatalog")]
-        public List<PriceCatalogResponse> PriceCatalog { get; set; }
+        public List<PriceCatalog> PriceCatalog { get; set; }
     }
 }
 
