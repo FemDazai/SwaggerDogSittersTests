@@ -1,11 +1,5 @@
 using SwaggerDogSittersTests.Client;
 using SwaggerDogSittersTests.Models;
-using NUnit.Framework;
-using System.Data;
-using Dapper;
-using System.Data.SqlClient;
-
-
 
 namespace SwaggerDogSittersTests
 {
@@ -69,9 +63,9 @@ namespace SwaggerDogSittersTests
                 Experience = 23,
                 Sex = 1,
                 Description = "string",
-                PriceCatalog = new List<PriceCatalogRequest>
+                PriceCatalog = new List<PriceCatalog>
                     {
-                        new PriceCatalogRequest
+                        new PriceCatalog
                         {
                             Service = 1,
                             Price = 5000

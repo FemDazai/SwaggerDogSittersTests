@@ -1,13 +1,5 @@
 ﻿using SwaggerDogSittersTests.Client;
 using SwaggerDogSittersTests.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
 
 namespace SwaggerDogSittersTests
 {
@@ -44,9 +36,9 @@ namespace SwaggerDogSittersTests
                 Experience = 23,
                 Sex = 1,
                 Description = "string",
-                PriceCatalog = new List<PriceCatalogRequest>
+                PriceCatalog = new List<PriceCatalog>
                 {
-                    new PriceCatalogRequest
+                    new PriceCatalog
                     {
                         Service = 1,
                         Price = 5000
