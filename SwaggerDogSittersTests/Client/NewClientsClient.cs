@@ -84,6 +84,52 @@ namespace SwaggerDogSittersTests.Client
 
             HttpRequestMessage message = new HttpRequestMessage()
 
+            Assert.AreEqual(expectedCode, actualCode);
+            // Iz-za specifici protokola hhtp, soobwenie zakodirovano. Nujno rasskodirovat
+            string responseJson = responseMessage.Content.ReadAsStringAsync().Result;
+            //1.ResponseMessage - blok samoqo soobweniya (obrawaemsa k pismu);
+            //2.Content = eqo soderjanie (obrawaemsa k contentu);
+            //3.ReadAsStringAsync - iz-za napravleniya mnogo-potocnogo progrramirovaniya, nam mojet ponadobitsa, neskolko vivodov reziltata, a tut mi utocnsyem, kakoe imenno nam nujno 
+            //(Ctobi paskodirovat kontent, obrawaet eqo v stringu)
+            //async-asinxronniy
+
+            List<SitterSearchResponseModel> sitters = JsonSerializer.Deserialize<List<SitterSearchResponseModel>>(responseJson)!;
+            return sitters;
+        }
+         
+        public void ChangeClientPassword(string token,PasswordChangeRequestModel model)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.NoContent;
+            string json = JsonSerializer.Serialize<PasswordChangeRequestModel>(model);
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            HttpClient client = new HttpClient(clientHandler);
+
+            HttpRequestMessage message = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Patch,
+                RequestUri = new System.Uri($"https://piter-education.ru:10000/Clients/password"),
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+            HttpResponseMessage responseMessage = client.Send(message);
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+
+            Assert.AreEqual(expectedCode, actualCode);
+        }
+
+
+        public void GetErrorWhenSitterPasswordIsWrongTest(SittersRequestModel model)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.UnprocessableEntity;
+            string jsone = JsonSerializer.Serialize<SittersRequestModel>(model);
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            HttpClient client = new HttpClient(clientHandler);
+            HttpRequestMessage message = new HttpRequestMessage()
+
             {
                 Method = HttpMethod.Post,
                 RequestUri = new System.Uri($"https://piter-education.ru:10000/Animals"),
