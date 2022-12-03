@@ -109,5 +109,30 @@ namespace SwaggerDogSittersTests.Client
             Assert.AreEqual(expectedCode, actualCode);
 
         }
+
+        public SitterIdResponseModel GetSitterInfoById(int id)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.OK;
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            HttpClient client = new HttpClient(clientHandler);
+
+            HttpRequestMessage message = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new System.Uri($"https://piter-education.ru:10000/Sitters/{id}")
+            };
+            HttpResponseMessage responseMessage = client.Send(message);
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+
+            Assert.AreEqual(expectedCode, actualCode);
+            string responseJson = responseMessage.Content.ReadAsStringAsync().Result;
+
+            SitterIdResponseModel sitters = JsonSerializer.Deserialize<SitterIdResponseModel>(responseJson)!;
+            return sitters;
+        }
+
     }
 }
