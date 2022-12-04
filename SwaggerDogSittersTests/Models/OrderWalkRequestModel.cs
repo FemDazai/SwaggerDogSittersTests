@@ -2,7 +2,7 @@
 
 namespace SwaggerDogSittersTests.Models
 {
-    public class OrderModel
+    public class OrderWalkRequestModel
     {
         [JsonPropertyName("clientId")]
         public int clientId { get; set; }
@@ -11,7 +11,7 @@ namespace SwaggerDogSittersTests.Models
         public int sitterId { get; set; }
 
         [JsonPropertyName("animalIds")]
-        public int animalIds { get; set; }
+        public List<int> animalIds { get; set; }
 
         [JsonPropertyName("status")]
         public int status { get; set; }

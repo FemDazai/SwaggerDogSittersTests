@@ -119,10 +119,10 @@ namespace SwaggerDogSittersTests.Client
             Assert.AreEqual(expectedCode, actualCode);
         }
 
-        public int GetOrderServiceWalk(string token, OrderModel model)
+        public int GetOrderServiceWalk(string token, OrderWalkRequestModel model)
         {
             HttpStatusCode expectedCode = HttpStatusCode.Created;
-            string json = JsonSerializer.Serialize<OrderModel>(model);
+            string json = JsonSerializer.Serialize<OrderWalkRequestModel>(model);
 
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
@@ -145,6 +145,7 @@ namespace SwaggerDogSittersTests.Client
 
             return id;
         }
+
         public ClientIdResponseModel GetClientInfoById(string token, int id  )
         {
             HttpStatusCode expectedCode = HttpStatusCode.OK;
@@ -167,6 +168,33 @@ namespace SwaggerDogSittersTests.Client
 
             ClientIdResponseModel clients = JsonSerializer.Deserialize<ClientIdResponseModel>(responseJson)!;
             return clients;
+        }
+
+        public int GetOrderServiceOverexpose(string token, OrderOverexposeRequestModel model)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.Created;
+            string json = JsonSerializer.Serialize<OrderOverexposeRequestModel>(model);
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            HttpClient client = new HttpClient(clientHandler);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            HttpRequestMessage message = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new System.Uri($"https://piter-education.ru:10000/Orders/overexpose"),
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+            HttpResponseMessage responseMessage = client.Send(message);
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+
+            string responseJson = responseMessage.Content.ReadAsStringAsync().Result;
+            int id = Convert.ToInt32(responseMessage.Content.ReadAsStringAsync().Result);
+            Assert.AreEqual(expectedCode, actualCode);
+
+            return id;
         }
     }
 }
