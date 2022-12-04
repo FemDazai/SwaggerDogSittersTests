@@ -5,24 +5,16 @@ namespace SwaggerDogSittersTests
 {
     public class RegistrationTests
     {
-        //[OneTimeSetUp]
-        //public void ClearClients()
-        //{
-        //    DBCleaner dBCleaner = new DBCleaner();
-        //    dBCleaner.Clear();
-        //}
-
         [Test]
         public void RegistrationAndAuthClientTest()
         {
-            //� ��� ���� �����, ������� ���� ������� � ��������. ������ ������ ��� ������
             NewClientsClient client = new NewClientsClient();
             ClientsRequestModel clientsRequestModel = new ClientsRequestModel()
             {
                 Name = "sasha",
                 LastName = "adilov",
                 Phone = "+79221110500",
-                Email = "AAADDIlovsashAAA@mail.com",
+                Email = "AdilovSasha@mail.com",
                 Password = "12345689",
                 Address = "1234567890",
                 Promocode = "string"
@@ -33,19 +25,12 @@ namespace SwaggerDogSittersTests
 
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "AAADDIlovsashAAA@mail.com",
+                Email = "AdilovSasha@mail.com",
                 Password = "12345689"
             };
             string actualToken = client.Auth(authRequestModel);
 
             Assert.NotNull(actualToken);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            DBCleaner dbc = new DBCleaner();
-            dbc.Clear();
         }
 
         [Test]
@@ -57,7 +42,7 @@ namespace SwaggerDogSittersTests
                 Name = "Zinaida",
                 LastName = "Pavlova",
                 Phone = "+71234567890",
-                Email = "ZZZ1iinaidapavlovnaa@mail.ru",
+                Email = "ZinaidaPavlova@mail.ru",
                 Password = "123456789",
                 Age = 130,
                 Experience = 23,
@@ -79,18 +64,12 @@ namespace SwaggerDogSittersTests
 
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "ZZZ1iinaidapavlovnaa@mail.ru",
+                Email = "ZinaidaPavlova@mail.ru",
                 Password = "123456789"
             };
             string actualToken = client.Auth(authRequestModel);
             Assert.NotNull(actualToken);
         }
-        //[TearDown]
-        //public void ClearSitters()
-        //{
-        //    DBCleaner dBCleaner = new DBCleaner();
-        //    dBCleaner.Clear();
-        //}
 
         [Test]
         public void AnimalRegistrationTest()
@@ -101,7 +80,7 @@ namespace SwaggerDogSittersTests
                 Name="Rina",
                 LastName="Kirova",
                 Phone="+71234567890",
-                Email="RRrinakir@mail.com",
+                Email="Rinakir@mail.com",
                 Password="123456789",
                 Address="1234567890",
                 Promocode="1234567890"
@@ -112,7 +91,7 @@ namespace SwaggerDogSittersTests
 
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "RRrinakir@mail.com",
+                Email = "Rinakir@mail.com",
                 Password = "123456789"
             };
             string actualToken = client.Auth(authRequestModel);
@@ -129,8 +108,14 @@ namespace SwaggerDogSittersTests
                 Size= 4
             };
             int actualid = client.AnimalRegistration(actualToken, animalRequestModel);
-            Assert.IsNotNull(actualid);
+            Assert.IsNotNull(actualid); 
+        }
 
+        [TearDown]
+        public void ClearSitters()
+        {
+            DBCleaner dBCleaner = new DBCleaner();
+            dBCleaner.Clear();
         }
     }
 }

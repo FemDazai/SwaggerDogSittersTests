@@ -15,7 +15,7 @@ namespace SwaggerDogSittersTests
                 Name = "Megi",
                 LastName = "Lick",
                 Phone = "+71231231231",
-                Email = "megi11@mail.ru",
+                Email = "megi@mail.ru",
                 Password = "123456789",
                 Age = 130,
                 Experience = 23,
@@ -32,14 +32,14 @@ namespace SwaggerDogSittersTests
             },
             new SittersRequestModel()
             {
-                Name = "Megi",
+                Name = "Nina",
                 LastName = "Lick",
                 Phone = "+71231231231",
-                Email = "megi22@mail.ru",
+                Email = "nina@mail.ru",
                 Password = "123456789",
                 Age = 130,
                 Experience = 23,
-                Sex = 1,
+                Sex = 2,
                 Description = "string",
                 PriceCatalog = new List<PriceCatalog>
                     {
@@ -63,7 +63,7 @@ namespace SwaggerDogSittersTests
                 Name = "sasha",
                 LastName = "adilov",
                 Phone = "+79221110500",
-                Email = "KAADDIlovsashAAA@mail.com",
+                Email = "adilov@mail.com",
                 Password = "12345689",
                 Address = "1234567890",
                 Promocode = "string"
@@ -74,7 +74,7 @@ namespace SwaggerDogSittersTests
 
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "KAADDIlovsashAAA@mail.com",
+                Email = "adilov@mail.com",
                 Password = "12345689"
             };
             string actualToken = client.Auth(authRequestModel);
@@ -84,11 +84,12 @@ namespace SwaggerDogSittersTests
             List<GetSittersResponseModel> sitters = sitter.GetSitters(actualToken);
             Assert.NotNull(sitters);
         }
-        //[TearDown]
-        //public void ClearSitters()
-        //{
-        //    DBCleaner dBCleaner = new DBCleaner();
-        //    dBCleaner.Clear();
-        //}
+
+        [TearDown]
+        public void ClearSitters()
+        {
+            DBCleaner dBCleaner = new DBCleaner();
+            dBCleaner.Clear();
+        }
     }
 }

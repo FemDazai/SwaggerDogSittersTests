@@ -15,7 +15,7 @@ namespace SwaggerDogSittersTests
                 Name = "sergey",
                 LastName = "sergeev",
                 Phone = "+79221110500",
-                Email = "sergeysergeev2222211111@mail.com",
+                Email = "sergey@mail.com",
                 Password = "12345689",
                 Address = "1234567890",
                 Promocode = "string"
@@ -30,7 +30,7 @@ namespace SwaggerDogSittersTests
                 Name = "Zina",
                 LastName = "Pavlova",
                 Phone = "+71234567890",
-                Email = "zinapavlovnaa222221111@mail.ru",
+                Email = "zinapavlovna@mail.ru",
                 Password = "123456789",
                 Age = 130,
                 Experience = 23,
@@ -46,8 +46,8 @@ namespace SwaggerDogSittersTests
                 }
 
             };
-            int actualId2 = sitterClient.RegistrationSitters(sittersRequestModel);
-            Assert.IsNotNull(actualId2);
+            int actualsitterId = sitterClient.RegistrationSitters(sittersRequestModel);
+            Assert.IsNotNull(actualsitterId);
 
             SearchRequestModel searchRequestModel = new SearchRequestModel()
             {
@@ -61,6 +61,7 @@ namespace SwaggerDogSittersTests
             List<SitterSearchResponseModel> sitters = sitterClient.GetSearch(searchRequestModel);
             Assert.NotNull(sitters);
         }
+
         [TearDown]
         public void TearDown()
         {

@@ -17,18 +17,18 @@ namespace SwaggerDogSittersTests
                 Name = "Hashirama",
                 LastName = "Madarov",
                 Phone = "+79221110500",
-                Email = "111haaaashiramamadarov@gmail.com",
+                Email = "hashirama@gmail.com",
                 Password = "123456789",
                 Address = "1234567890",
                 Promocode = "string"
             };
 
-            int actualId1 = client.RegistrationClient(clientsRequestModel);
-            Assert.IsNotNull(actualId1);
+            int actualclientId = client.RegistrationClient(clientsRequestModel);
+            Assert.IsNotNull(actualclientId);
 
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "111haaaashiramamadarov@gmail.com",
+                Email = "hashirama@gmail.com",
                 Password = "123456789"
             };
             string actualToken = client.Auth(authRequestModel);
@@ -40,7 +40,7 @@ namespace SwaggerDogSittersTests
                 Name = "Kabuto",
                 LastName = "Yakushi",
                 Phone = "+71234567890",
-                Email = "111kaaaabutoyakushi@mail.ru",
+                Email = "kabuto@mail.ru",
                 Password = "123456789",
                 Age = 130,
                 Experience = 3,
@@ -55,33 +55,40 @@ namespace SwaggerDogSittersTests
                         }
                     }
             };
-            int actualId2 = sitter.RegistrationSitters(sittersrequestModel);
-            Assert.IsNotNull(actualId2);
+            int actualsitterId = sitter.RegistrationSitters(sittersrequestModel);
+            Assert.IsNotNull(actualsitterId);
 
             AnimalRequestModel animalRequestModel = new AnimalRequestModel()
             {
                 Name = "Orochimaru",
                 Age = 25,
                 RecommendationsForCare = "string",
-                ClientId = actualId1,
+                ClientId = actualclientId,
                 Breed = "poodles",
                 Size = 4
             };
-            int actualId3 = client.AnimalRegistration(actualToken, animalRequestModel);
-            Assert.IsNotNull(actualId3);
+            int actualanimalId = client.AnimalRegistration(actualToken, animalRequestModel);
+            Assert.IsNotNull(actualanimalId);
 
             OrderModel order1 = new OrderModel()
             {
-                clientId = actualId1,
-                sitterId = actualId2,
-                animalIds = actualId3,
+                clientId = actualclientId,
+                sitterId = actualsitterId,
+                animalIds = actualanimalId,
                 status = 1,
                 workDate = "2022 - 12 - 03T15:14:10.346Z",
                 district = 1,
                 isTrial = true,
             };
-            int actualId4 = client.GetOrderServiceWalk(actualToken, order1);
-            Assert.IsNotNull(actualId4);
+            int actualId = client.GetOrderServiceWalk(actualToken, order1);
+            Assert.IsNotNull(actualId);
+        }
+
+        [TearDown]
+        public void ClearSitters()
+        {
+            DBCleaner dBCleaner = new DBCleaner();
+            dBCleaner.Clear();
         }
     }
 }

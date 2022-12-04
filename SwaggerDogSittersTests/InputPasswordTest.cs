@@ -14,7 +14,7 @@ namespace SwaggerDogSittersTests
                 Name = "Zinaida",
                 LastName = "Pavlova",
                 Phone = "+71234567890",
-                Email = "ZZZiinaidapav0lovnaa@mail.ru",
+                Email = "zinaida@mail.ru",
                 Password = "1234567",
                 Age = 130,
                 Experience = 23,
@@ -29,6 +29,13 @@ namespace SwaggerDogSittersTests
                     }
             }
             };
+        }
+
+        [TearDown]
+        public void ClearSitters()
+        {
+            DBCleaner dBCleaner = new DBCleaner();
+            dBCleaner.Clear();
         }
     }
 }

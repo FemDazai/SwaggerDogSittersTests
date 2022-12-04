@@ -2,6 +2,7 @@
 using SwaggerDogSittersTests.Models;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 
@@ -114,7 +115,6 @@ namespace SwaggerDogSittersTests.Client
         public SitterIdResponseModel GetSitterInfoById(string token, int id)
         {
             HttpStatusCode expectedCode = HttpStatusCode.OK;
-
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 

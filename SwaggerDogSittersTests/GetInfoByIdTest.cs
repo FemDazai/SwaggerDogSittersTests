@@ -1,10 +1,5 @@
 ﻿using SwaggerDogSittersTests.Client;
 using SwaggerDogSittersTests.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SwaggerDogSittersTests
 {
@@ -19,7 +14,7 @@ namespace SwaggerDogSittersTests
                 Name = "Zinaida",
                 LastName = "Pavlova",
                 Phone = "+71234567890",
-                Email = "5zinaidapavlovna@mail.ru",
+                Email = "zinaidapavlovna@mail.ru",
                 Password = "123456789",
                 Age = 130,
                 Experience = 23,
@@ -34,18 +29,17 @@ namespace SwaggerDogSittersTests
                         }
                     }
             };
-
             int actualid = sitterClient.RegistrationSitters(sittersrequestModel);
             Assert.NotNull(actualid);
 
             NewClientsClient client = new NewClientsClient();
+
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "5zinaidapavlovna@mail.ru",
+                Email = "zinaidapavlovna@mail.ru",
                 Password = "123456789"
             };
             string actualToken =client.Auth(authRequestModel);
-
             Assert.NotNull(actualToken);
 
             SitterIdResponseModel model = sitterClient.GetSitterInfoById(actualToken, actualid);
@@ -61,7 +55,7 @@ namespace SwaggerDogSittersTests
                 Name = "Molly",
                 LastName = "Posh",
                 Phone = "+79221110500",
-                Email = "mollyposhla@mail.com",
+                Email = "mollyposh@mail.com",
                 Password = "12345689",
                 Address = "1234567890",
                 Promocode = "string"
@@ -72,7 +66,7 @@ namespace SwaggerDogSittersTests
 
             AuthRequestModel authRequestModel = new AuthRequestModel()
             {
-                Email = "mollyposhla@mail.com",
+                Email = "mollyposh@mail.com",
                 Password = "12345689"
             };
             string actualToken = client.Auth(authRequestModel);
@@ -80,8 +74,14 @@ namespace SwaggerDogSittersTests
             Assert.NotNull(actualToken);
 
             ClientIdResponseModel model = client.GetClientInfoById(actualToken, actualId);
-
             Assert.NotNull(model);
+        }
+
+        [TearDown]
+        public void ClearSitters()
+        {
+            DBCleaner dBCleaner = new DBCleaner();
+            dBCleaner.Clear();
         }
     }
 }
