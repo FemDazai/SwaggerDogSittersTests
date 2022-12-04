@@ -1,13 +1,8 @@
 ﻿using SwaggerDogSittersTests.Models;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json;
-using System.Collections;
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
-
 
 namespace SwaggerDogSittersTests.Client
 {
@@ -195,6 +190,28 @@ namespace SwaggerDogSittersTests.Client
             Assert.AreEqual(expectedCode, actualCode);
 
             return id;
+        }
+
+        public void GetErrorWhenClientPasswordIsWrong(ClientsRequestModel model)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.UnprocessableEntity;
+            string jsone = JsonSerializer.Serialize<ClientsRequestModel>(model);
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            HttpClient client = new HttpClient(clientHandler);
+            HttpRequestMessage message = new HttpRequestMessage()
+
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new System.Uri($"https://piter-education.ru:10000/Clients"),
+                Content = new StringContent(jsone, Encoding.UTF8, "application/json")
+            };
+            HttpResponseMessage responseMessage = client.Send(message);
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+
+            Assert.AreEqual(expectedCode, actualCode);
+
         }
     }
 }

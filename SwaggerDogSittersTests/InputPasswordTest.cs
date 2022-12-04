@@ -31,6 +31,22 @@ namespace SwaggerDogSittersTests
             };
         }
 
+        [Test]
+        public void InputPasswordTestClients()
+        {
+            NewClientsClient client = new NewClientsClient();
+            ClientsRequestModel clientsRequestModel = new ClientsRequestModel()
+            {
+                Name = "sasha",
+                LastName = "adilov",
+                Phone = "+79221110500",
+                Email = "AdilovSasha@mail.com",
+                Password = "12345",
+                Address = "1234567890",
+                Promocode = "string"
+            };
+        }
+
         [TearDown]
         public void ClearSitters()
         {
