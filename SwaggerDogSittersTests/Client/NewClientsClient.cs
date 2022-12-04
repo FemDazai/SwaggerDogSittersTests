@@ -133,11 +133,10 @@ namespace SwaggerDogSittersTests.Client
             };
             HttpResponseMessage responseMessage = client.Send(message);
             HttpStatusCode actualCode = responseMessage.StatusCode;
+            Assert.AreEqual(expectedCode, actualCode);
 
             string responseJson = responseMessage.Content.ReadAsStringAsync().Result;
             int id = Convert.ToInt32(responseMessage.Content.ReadAsStringAsync().Result);
-            Assert.AreEqual(expectedCode, actualCode);
-
             return id;
         }
 
@@ -184,10 +183,10 @@ namespace SwaggerDogSittersTests.Client
             };
             HttpResponseMessage responseMessage = client.Send(message);
             HttpStatusCode actualCode = responseMessage.StatusCode;
+            Assert.AreEqual(expectedCode, actualCode);
 
             string responseJson = responseMessage.Content.ReadAsStringAsync().Result;
             int id = Convert.ToInt32(responseMessage.Content.ReadAsStringAsync().Result);
-            Assert.AreEqual(expectedCode, actualCode);
 
             return id;
         }
