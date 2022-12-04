@@ -4,7 +4,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
-
 namespace SwaggerDogSittersTests.Client
 {
     public class NewClientsClient
@@ -191,6 +190,28 @@ namespace SwaggerDogSittersTests.Client
             Assert.AreEqual(expectedCode, actualCode);
 
             return id;
+        }
+
+        public void GetErrorWhenClientPasswordIsWrong(ClientsRequestModel model)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.UnprocessableEntity;
+            string jsone = JsonSerializer.Serialize<ClientsRequestModel>(model);
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            HttpClient client = new HttpClient(clientHandler);
+            HttpRequestMessage message = new HttpRequestMessage()
+
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new System.Uri($"https://piter-education.ru:10000/Clients"),
+                Content = new StringContent(jsone, Encoding.UTF8, "application/json")
+            };
+            HttpResponseMessage responseMessage = client.Send(message);
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+
+            Assert.AreEqual(expectedCode, actualCode);
+
         }
         public int GetOrderServiceDailySittings(string token, OrderDailySittingRequestModel model)
         {
