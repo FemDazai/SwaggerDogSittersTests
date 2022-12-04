@@ -19,7 +19,7 @@ namespace SwaggerDogSittersTests
                 Name = "Zinaida",
                 LastName = "Pavlova",
                 Phone = "+71234567890",
-                Email = "ZZ1Z12221iinaidapavlovnaa1@mail.ru",
+                Email = "5zinaidapavlovna@mail.ru",
                 Password = "123456789",
                 Age = 130,
                 Experience = 23,
@@ -38,7 +38,48 @@ namespace SwaggerDogSittersTests
             int actualid = sitterClient.RegistrationSitters(sittersrequestModel);
             Assert.NotNull(actualid);
 
-            SitterIdResponseModel model = sitterClient.GetSitterInfoById(actualid);
+            NewClientsClient client = new NewClientsClient();
+            AuthRequestModel authRequestModel = new AuthRequestModel()
+            {
+                Email = "5zinaidapavlovna@mail.ru",
+                Password = "123456789"
+            };
+            string actualToken =client.Auth(authRequestModel);
+
+            Assert.NotNull(actualToken);
+
+            SitterIdResponseModel model = sitterClient.GetSitterInfoById(actualToken, actualid);
+            Assert.NotNull(model);
+        }
+
+        [Test]
+        public void GetClientInfoByIdTest()
+        {
+            NewClientsClient client = new NewClientsClient();
+            ClientsRequestModel clientsRequestModel = new ClientsRequestModel()
+            {
+                Name = "Molly",
+                LastName = "Posh",
+                Phone = "+79221110500",
+                Email = "mollyposhla@mail.com",
+                Password = "12345689",
+                Address = "1234567890",
+                Promocode = "string"
+            };
+
+            int actualId = client.RegistrationClient(clientsRequestModel);
+            Assert.IsNotNull(actualId);
+
+            AuthRequestModel authRequestModel = new AuthRequestModel()
+            {
+                Email = "mollyposhla@mail.com",
+                Password = "12345689"
+            };
+            string actualToken = client.Auth(authRequestModel);
+
+            Assert.NotNull(actualToken);
+
+            ClientIdResponseModel model = client.GetClientInfoById(actualToken, actualId);
 
             Assert.NotNull(model);
         }
