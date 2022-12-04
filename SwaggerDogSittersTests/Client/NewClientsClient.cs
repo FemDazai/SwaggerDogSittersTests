@@ -238,5 +238,32 @@ namespace SwaggerDogSittersTests.Client
 
             return id;
         }
+
+        public int GetOrderServiceSittingForADay(string token, OrderSittingForADayRequestModel model)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.Created;
+            string json = JsonSerializer.Serialize<OrderSittingForADayRequestModel>(model);
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            HttpClient client = new HttpClient(clientHandler);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            HttpRequestMessage message = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new System.Uri($"https://piter-education.ru:10000/Orders/sitting-for-a-day"),
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+            HttpResponseMessage responseMessage = client.Send(message);
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+
+            string responseJson = responseMessage.Content.ReadAsStringAsync().Result;
+            int id = Convert.ToInt32(responseMessage.Content.ReadAsStringAsync().Result);
+            Assert.AreEqual(expectedCode, actualCode);
+
+            return id;
+        }
     }
 }
