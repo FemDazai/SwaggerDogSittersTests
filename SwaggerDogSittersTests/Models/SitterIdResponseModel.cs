@@ -31,6 +31,7 @@ namespace SwaggerDogSittersTests.Models
         [JsonPropertyName("description")]
         public string description { get; set; }
 
+        [JsonPropertyName("priceCatalog")]
         public List<PriceCatalog> priceCatalog { get; set; }
 
         [JsonPropertyName("isDeleted")]

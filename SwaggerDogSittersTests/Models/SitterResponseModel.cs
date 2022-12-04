@@ -8,39 +8,30 @@ namespace SwaggerDogSittersTests.Models
     
     public class SitterResponseModel
     {
-        [JsonProperty("name")]
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonProperty("lastName")]
         [JsonPropertyName("lastName")]
         public string LastName { get; set; }
 
-        [JsonProperty("phone")]
         [JsonPropertyName("phone")]
         public string Phone { get; set; }
 
-        [JsonProperty("email")]
         [JsonPropertyName("email")]
         public string Email { get; set; }
 
-        [JsonProperty("password")]
         [JsonPropertyName("password")]
         public string Password { get; set; }
 
-        [JsonProperty("age")]
         [JsonPropertyName("age")]
         public int Age { get; set; }
 
-        [JsonProperty("experience")]
         [JsonPropertyName("experience")]
         public int Experience { get; set; }
 
-        [JsonProperty("sex")]
         [JsonPropertyName("sex")]
         public int Sex { get; set; }
 
-        [JsonProperty("description")]
         [JsonPropertyName("description")]
         public string Description { get; set; }
 
