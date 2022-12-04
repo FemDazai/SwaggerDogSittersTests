@@ -145,7 +145,28 @@ namespace SwaggerDogSittersTests.Client
 
             return id;
         }
-       
-        
+        public ClientIdResponseModel GetClientInfoById(string token, int id  )
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.OK;
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            HttpClient client = new HttpClient(clientHandler);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            HttpRequestMessage message = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new System.Uri($"https://piter-education.ru:10000/Clients/{id}")
+            };
+            HttpResponseMessage responseMessage = client.Send(message);
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+
+            Assert.AreEqual(expectedCode, actualCode);
+            string responseJson = responseMessage.Content.ReadAsStringAsync().Result;
+
+            ClientIdResponseModel clients = JsonSerializer.Deserialize<ClientIdResponseModel>(responseJson)!;
+            return clients;
+        }
     }
 }

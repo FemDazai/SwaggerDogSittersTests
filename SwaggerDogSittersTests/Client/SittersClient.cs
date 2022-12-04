@@ -1,4 +1,5 @@
-﻿using SwaggerDogSittersTests.Models;
+﻿using Newtonsoft.Json.Linq;
+using SwaggerDogSittersTests.Models;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
@@ -110,7 +111,7 @@ namespace SwaggerDogSittersTests.Client
 
         }
 
-        public SitterIdResponseModel GetSitterInfoById(int id)
+        public SitterIdResponseModel GetSitterInfoById(string token, int id)
         {
             HttpStatusCode expectedCode = HttpStatusCode.OK;
 
@@ -118,7 +119,7 @@ namespace SwaggerDogSittersTests.Client
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
             HttpClient client = new HttpClient(clientHandler);
-
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpRequestMessage message = new HttpRequestMessage()
             {
                 Method = HttpMethod.Get,
