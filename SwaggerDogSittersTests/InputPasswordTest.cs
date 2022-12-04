@@ -1,5 +1,6 @@
 ﻿using SwaggerDogSittersTests.Client;
 using SwaggerDogSittersTests.Models;
+using System.Net;
 
 namespace SwaggerDogSittersTests
 {
@@ -45,7 +46,9 @@ namespace SwaggerDogSittersTests
                 Address = "1234567890",
                 Promocode = "string"
             };
+            client.GetErrorWhenClientPasswordIsWrong(clientsRequestModel);
         }
+
 
         [TearDown]
         public void ClearSitters()

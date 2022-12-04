@@ -127,8 +127,8 @@ namespace SwaggerDogSittersTests.Client
             };
             HttpResponseMessage responseMessage = client.Send(message);
             HttpStatusCode actualCode = responseMessage.StatusCode;
-
             Assert.AreEqual(expectedCode, actualCode);
+
             string responseJson = responseMessage.Content.ReadAsStringAsync().Result;
 
             SitterIdResponseModel sitters = JsonSerializer.Deserialize<SitterIdResponseModel>(responseJson)!;
