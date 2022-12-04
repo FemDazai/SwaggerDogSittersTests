@@ -1,12 +1,8 @@
 ﻿using SwaggerDogSittersTests.Models;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json;
-using System.Collections;
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 
 
 namespace SwaggerDogSittersTests.Client
@@ -185,6 +181,32 @@ namespace SwaggerDogSittersTests.Client
             {
                 Method = HttpMethod.Post,
                 RequestUri = new System.Uri($"https://piter-education.ru:10000/Orders/overexpose"),
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+            HttpResponseMessage responseMessage = client.Send(message);
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+
+            string responseJson = responseMessage.Content.ReadAsStringAsync().Result;
+            int id = Convert.ToInt32(responseMessage.Content.ReadAsStringAsync().Result);
+            Assert.AreEqual(expectedCode, actualCode);
+
+            return id;
+        }
+        public int GetOrderServiceDailySittings(string token, OrderDailySittingRequestModel model)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.Created;
+            string json = JsonSerializer.Serialize<OrderDailySittingRequestModel>(model);
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            HttpClient client = new HttpClient(clientHandler);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            HttpRequestMessage message = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new System.Uri($"https://piter-education.ru:10000/Orders/daily-sitting"),
                 Content = new StringContent(json, Encoding.UTF8, "application/json")
             };
             HttpResponseMessage responseMessage = client.Send(message);

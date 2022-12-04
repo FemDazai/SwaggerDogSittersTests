@@ -7,7 +7,7 @@ namespace SwaggerDogSittersTests
     public class OrderService
     {
         [Test]
-        public void GetOrderSeviceWalk()
+        public void GetOrderSeviceWalkTest()
         { 
             ClientsRequestModel clientRequest = new ClientsRequestModel();
             NewClientsClient client = new NewClientsClient();
@@ -88,7 +88,7 @@ namespace SwaggerDogSittersTests
         }
 
         [Test]
-        public void GetOrderSeviceOverexpose()
+        public void GetOrderSeviceOverexposeTest()
         {
             NewClientsClient client = new NewClientsClient();
             SittersClient sitter = new SittersClient();
@@ -168,6 +168,87 @@ namespace SwaggerDogSittersTests
             Assert.IsNotNull(actualId);
         }
 
+        [Test]
+        public void GetOrderServiceDailySittingsTest()
+        {
+            ClientsRequestModel clientRequest = new ClientsRequestModel();
+            NewClientsClient client = new NewClientsClient();
+            SittersClient sitter = new SittersClient();
+            ClientsRequestModel clientsRequestModel = new ClientsRequestModel()
+            {
+                Name = "Madara",
+                LastName = "Uchiha",
+                Phone = "+79221110500",
+                Email = "madarauchiha@gmail.com",
+                Password = "123456789",
+                Address = "1234567890",
+                Promocode = "string"
+            };
+
+            int actualclientId = client.RegistrationClient(clientsRequestModel);
+            Assert.IsNotNull(actualclientId);
+
+            AuthRequestModel authRequestModel = new AuthRequestModel()
+            {
+                Email = "madarauchiha@gmail.com",
+                Password = "123456789"
+            };
+            string actualToken = client.Auth(authRequestModel);
+
+            Assert.NotNull(actualToken);
+
+            SittersRequestModel sittersrequestModel = new SittersRequestModel()
+            {
+                Name = "Yamato",
+                LastName = "Tenzo",
+                Phone = "+71234567890",
+                Email = "yamatotenzo@mail.ru",
+                Password = "123456789",
+                Age = 130,
+                Experience = 3,
+                Sex = 1,
+                Description = "string",
+                PriceCatalog = new List<PriceCatalog>
+                    {
+                        new PriceCatalog
+                        {
+                            Service = 1,
+                            Price = 5000
+                        }
+                    }
+            };
+            int actualsitterId = sitter.RegistrationSitters(sittersrequestModel);
+            Assert.IsNotNull(actualsitterId);
+
+            AnimalRequestModel animalRequestModel = new AnimalRequestModel()
+            {
+                Name = "Pakun",
+                Age = 25,
+                RecommendationsForCare = "string",
+                ClientId = actualclientId,
+                Breed = "poodles",
+                Size = 4
+            };
+            int actualanimalId = client.AnimalRegistration(actualToken, animalRequestModel);
+            Assert.IsNotNull(actualanimalId);
+
+            OrderDailySittingRequestModel order1 = new OrderDailySittingRequestModel()
+            {
+                clientId = actualclientId,
+                sitterId = actualsitterId,
+                animalIds = new List<int>
+                {
+                    actualanimalId
+                },
+                status = 1,
+                workDate = "2022 - 12 - 03T15:14:10.346Z",
+                district = 1,
+                dayQuantity = 60,
+                walkPerDayQuantity = 0
+            };
+            int actualId = client.GetOrderServiceDailySittings(actualToken, order1);
+            Assert.IsNotNull(actualId);
+        }
         [TearDown]
         public void ClearSitters()
         {
