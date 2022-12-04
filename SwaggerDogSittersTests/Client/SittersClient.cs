@@ -133,6 +133,27 @@ namespace SwaggerDogSittersTests.Client
             SitterIdResponseModel sitters = JsonSerializer.Deserialize<SitterIdResponseModel>(responseJson)!;
             return sitters;
         }
+        public void ChangeDogSittersPassword(string token, PasswordChangeRequestModel model)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.NoContent;
+            string json = JsonSerializer.Serialize<PasswordChangeRequestModel>(model);
 
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            HttpClient client = new HttpClient(clientHandler);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            HttpRequestMessage message = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Patch,
+                RequestUri = new System.Uri($"https://piter-education.ru:10000/Sitters/password"),
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+            HttpResponseMessage responseMessage = client.Send(message);
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+
+            Assert.AreEqual(expectedCode, actualCode);
+        }
+    
     }
 }
+
